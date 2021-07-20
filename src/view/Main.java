@@ -19,6 +19,7 @@ public class Main extends javax.swing.JFrame {
     private NoteControl noteCtr;
     private DateUtil dateUtil;
     private TableModelNote model;
+    private Note newNote;
     
     /**
      * Creates new form Main
@@ -308,8 +309,8 @@ public class Main extends javax.swing.JFrame {
 
     private void tbNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNotesMouseClicked
         if(evt.getClickCount() == 2) {
-            Note note = model.getNote(tbNotes.getSelectedRow());
-            loadData(note);
+            newNote = model.getNote(tbNotes.getSelectedRow());
+            loadData(newNote);
         }
     }//GEN-LAST:event_tbNotesMouseClicked
 
