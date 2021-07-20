@@ -66,6 +66,15 @@ public class TableModelNote extends AbstractTableModel{
         fireTableRowsInserted(lastIndex, lastIndex);
     }
     
+    public void updateNote(Note note) {
+        for(int i=0; i < rows.size(); i++) {
+            if(rows.get(i).getId() == note.getId()) {
+                rows.set(i, note);
+                fireTableRowsUpdated(i, i);
+            }
+        }
+    }
+    
     public Note getNote(int index) {
         return this.rows.get(index);
     }

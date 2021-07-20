@@ -292,17 +292,25 @@ public class Main extends javax.swing.JFrame {
 
     private void btIncludeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIncludeActionPerformed
         Note note = getNoteScreen();
-        noteCtr.save(note);
-        JOptionPane.showMessageDialog(null, "Nota incluída com sucesso!");
-        model.addNote(note);
+        if(newNote == null) {
+            noteCtr.save(note);
+            JOptionPane.showMessageDialog(null, "Nota incluída com sucesso!");
+            model.addNote(note);
+        }else{
+            note.setId(newNote.getId());
+            noteCtr.update(note);
+            JOptionPane.showMessageDialog(null, "Nota atualizada com sucesso!");
+            model.updateNote(note);
+            newNote = null;
+        }
         clean();
     }//GEN-LAST:event_btIncludeActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         int rowSelected = tbNotes.getSelectedRow();
         if(rowSelected != -1) {
-            int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esse registro?", "Atenção", JOptionPane.YES_NO_OPTION);
-            if(opcao == 0) {
+            int option = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esse registro?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if(option == 0) {
                 Note note = model.getNote(rowSelected);
                 noteCtr.delete(note);
                 model.deleteNote(rowSelected);
@@ -313,10 +321,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btDeleteActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        int linhaSelecionada = tbNotes.getSelectedRow();
+        int rowSelected = tbNotes.getSelectedRow();
         
-        if(linhaSelecionada != -1) {
-            newNote = model.getNote(linhaSelecionada);
+        if(rowSelected != -1) {
+            newNote = model.getNote(rowSelected);
             loadData(newNote);
         }
     }//GEN-LAST:event_btEditActionPerformed
