@@ -235,6 +235,11 @@ public class Main extends javax.swing.JFrame {
         jPanel5.setPreferredSize(new java.awt.Dimension(75, 402));
 
         btEdit.setText("Editar");
+        btEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditActionPerformed(evt);
+            }
+        });
 
         btDelete.setText("Excluir");
         btDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -307,21 +312,28 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDeleteActionPerformed
 
+    private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
+        int linhaSelecionada = tbNotes.getSelectedRow();
+        
+        if(linhaSelecionada != -1) {
+            newNote = model.getNote(linhaSelecionada);
+            loadData(newNote);
+        }
+    }//GEN-LAST:event_btEditActionPerformed
+
     private void tbNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNotesMouseClicked
         if(evt.getClickCount() == 2) {
-            newNote = model.getNote(tbNotes.getSelectedRow());
-            loadData(newNote);
+            btEditActionPerformed(null);
         }
     }//GEN-LAST:event_tbNotesMouseClicked
 
-    private void loadData(Note note){
-        txName.setText(note.getName());
-        cbActivateAlarm.setSelected(note.getAlarm() == 1);
-        txDate.setDate(note.getDateTimeAlarm());
-        txHour.setText(dateUtil.getTimeFormatted(note.getDateTimeAlarm()));
-        txaDescription.setText(note.getDescription());
+    private void loadData(Note newNote){
+        txName.setText(newNote.getName());
+        cbActivateAlarm.setSelected(newNote.getAlarm() == 1);
+        txDate.setDate(newNote.getDateTimeAlarm());
+        txHour.setText(dateUtil.getTimeFormatted(newNote.getDateTimeAlarm()));
+        txaDescription.setText(newNote.getDescription());
     }
-    
     /**
      * @param args the command line arguments
      */

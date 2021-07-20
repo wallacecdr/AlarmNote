@@ -36,11 +36,11 @@ public class DateUtil {
         return dateTimeFormatted;
     }
     
-    public String getTimeFormatted(Timestamp time) {
+    public String getTimeFormatted(Timestamp dateTime) {
         String timeFormatted = "";
-        if(time != null) {
-           SimpleDateFormat timeFormat = new SimpleDateFormat(getTimeFormatter());
-           timeFormatted = timeFormat.format(new Date(time.getTime())); 
+        if(dateTime != null) {
+            SimpleDateFormat timeFormat = new SimpleDateFormat(getTimeFormatter());
+            timeFormatted = timeFormat.format(new Date(dateTime.getTime()));
         }
         return timeFormatted;
     }
