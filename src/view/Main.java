@@ -205,6 +205,11 @@ public class Main extends javax.swing.JFrame {
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         tbNotes.setModel(new TableModelNote());
+        tbNotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNotesMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbNotes);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -231,6 +236,11 @@ public class Main extends javax.swing.JFrame {
         btEdit.setText("Editar");
 
         btDelete.setText("Excluir");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -282,6 +292,35 @@ public class Main extends javax.swing.JFrame {
         clean();
     }//GEN-LAST:event_btIncludeActionPerformed
 
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        int rowSelected = tbNotes.getSelectedRow();
+        if(rowSelected != -1) {
+            int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esse registro?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if(opcao == 0) {
+                Note note = model.getNote(rowSelected);
+                noteCtr.delete(note);
+                model.deleteNote(rowSelected);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um registro");
+        }
+    }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void tbNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNotesMouseClicked
+        if(evt.getClickCount() == 2) {
+            Note note = model.getNote(tbNotes.getSelectedRow());
+            loadData(note);
+        }
+    }//GEN-LAST:event_tbNotesMouseClicked
+
+    private void loadData(Note note){
+        txName.setText(note.getName());
+        cbActivateAlarm.setSelected(note.getAlarm() == 1);
+        txDate.setDate(note.getDateTimeAlarm());
+        txHour.setText(dateUtil.getTimeFormatted(note.getDateTimeAlarm()));
+        txaDescription.setText(note.getDescription());
+    }
+    
     /**
      * @param args the command line arguments
      */

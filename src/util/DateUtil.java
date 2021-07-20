@@ -19,6 +19,10 @@ public class DateUtil {
         return dateTime.toDate();
     }
     
+    private String getTimeFormatter() {
+        return "HH:mm";
+    }
+    
     private String getDateTimeFormatter() {
         return "dd/MM/yyyy HH:mm";
     }
@@ -30,5 +34,14 @@ public class DateUtil {
             dateTimeFormatted = dateTimeFormat.format(new Date(dateTime.getTime()));
         }
         return dateTimeFormatted;
+    }
+    
+    public String getTimeFormatted(Timestamp time) {
+        String timeFormatted = "";
+        if(time != null) {
+           SimpleDateFormat timeFormat = new SimpleDateFormat(getTimeFormatter());
+           timeFormatted = timeFormat.format(new Date(time.getTime())); 
+        }
+        return timeFormatted;
     }
 }
