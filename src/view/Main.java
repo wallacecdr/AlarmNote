@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import model.Note;
 import model.tablemodel.TableModelNote;
 import util.DateUtil;
+import util.NoteTray;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Main extends javax.swing.JFrame {
     private DateUtil dateUtil;
     private TableModelNote model;
     private Note newNote;
+    private NoteTray noteTray;
     
     /**
      * Creates new form Main
@@ -30,6 +32,10 @@ public class Main extends javax.swing.JFrame {
         this.noteCtr = new NoteControl();
         this.dateUtil = new DateUtil();
         this.model = (TableModelNote) tbNotes.getModel();
+        this.noteTray = new NoteTray(this);
+        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        noteTray.createNoteTray();
         
         txDate.setDate(new Date());
         
@@ -107,6 +113,11 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -134,6 +145,8 @@ public class Main extends javax.swing.JFrame {
                 btIncludeActionPerformed(evt);
             }
         });
+
+        txDate.setDateFormatString("dd/MM/yyyy");
 
         jLabel3.setText("Data agendamento:");
 
@@ -334,6 +347,10 @@ public class Main extends javax.swing.JFrame {
             btEditActionPerformed(null);
         }
     }//GEN-LAST:event_tbNotesMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        noteTray.minimize();
+    }//GEN-LAST:event_formWindowClosed
 
     private void loadData(Note newNote){
         txName.setText(newNote.getName());
