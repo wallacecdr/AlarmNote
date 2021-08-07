@@ -1,5 +1,6 @@
 package util;
 
+import control.ScheduleControl;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -26,6 +27,7 @@ public class NoteTray {
     private Image image;
     private JFrame jFrame;
     private SystemTray tray;
+    private ScheduleControl scheduleCtr;
 
     public NoteTray(JFrame jFrame) {
         this.popup = new PopupMenu();
@@ -35,6 +37,7 @@ public class NoteTray {
         this.trayIcon = new TrayIcon(image, "AlarmNote", popup);
         this.trayIcon.setImageAutoSize(true);
         this.jFrame = jFrame;
+        this.scheduleCtr = new ScheduleControl();
     }
     
     public void createNoteTray() {
@@ -49,6 +52,7 @@ public class NoteTray {
             this.exitItem.addActionListener(getActionClose());
             
             this.tray.add(trayIcon);
+            this.scheduleCtr.initAlarms(trayIcon);
         } catch (AWTException ex) {
             System.out.println("Erro ao carregar NoteTray");
         }
