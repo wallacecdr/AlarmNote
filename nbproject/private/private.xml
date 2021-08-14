@@ -6,7 +6,10 @@
             <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/view/Main.java</file>
             <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/control/NoteControl.java</file>
             <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/model/tablemodel/TableModelNote.java</file>
+            <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/view/Install.java</file>
+            <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/entity/HibernateUtil.java</file>
             <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/util/DateUtil.java</file>
+            <file>file:/C:/Users/Wallace/Documents/NetBeansProjects/AlarmNote/src/control/ScheduleControl.java</file>
         </group>
     </open-files>
 </project-private>
